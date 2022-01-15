@@ -28,32 +28,24 @@ graf = [[[2, 3], [7, 9]],
         [[0, 1], [9, 3]]]
 
 # temp vars for 
-visited = []
+itr = []
+unvisited = [0, 1, 2, 3]
 shortest  = [0, math.inf, math.inf, math.inf]
-x = shortest.copy()
+
 
 
 def ch(point, way, point_val):
     global shortest
-    if graf[point][1][way] + point_val < shortest[point]:
-        shortest[graf[point][0][way]] = graf[point][1][way]
-
+    pnt_pos = graf[point][0][way]
+    pnt_val = graf[point][1][way]
+    if pnt_val + point_val < shortest[pnt_pos]:
+        shortest[pnt_pos] = pnt_val + point_val
 
 def da_way():
-    global x
-    for i in range(4):
-        y = min(x)
-# TODO fix this: index of point is in visited not its value
-        print(y in visited)
-        print(y)
-        print(visited)
-        if y in visited and y in x:
-            print("xd")
-            x.remove(y)
-        else:
-            #print(min(x))
-            #print(x)
-            return shortest.index(min(x))
+    x = []
+    for i in unvisited:
+        x.append(shortest[i])
+    return shortest.index(min(x))
 
 
 # body
@@ -61,4 +53,8 @@ for i in range(4):
     cnt = da_way()
     for j in range(2):
         ch(cnt, j, shortest[cnt])
-    visited.append(cnt)
+    unvisited.remove(cnt)
+    itr.append(cnt)
+
+print(itr)
+print(shortest)
