@@ -18,7 +18,6 @@
 
 import math
 
-# ywa's dijkstra's algorithm implementaition
 
 # graph in lists
 # god kill me please
@@ -27,34 +26,36 @@ graf = [[[2, 3], [7, 9]],
         [[0, 1], [7, 5]],
         [[0, 1], [9, 3]]]
 
-# temp vars for 
-itr = []
-unvisited = [0, 1, 2, 3]
-shortest  = [0, math.inf, math.inf, math.inf]
+def alg(graph):
+    # setup
+    # itr = []
+    unvisited = [graph.index(i) for i in graph]
+    shortest  = [math.inf for i in graph]
+    shortest[0] = 0
+    
+    
+    def wrt(point, point_val, graph, shrt):
+        pnt_pos = graph[point][0]
+        pnt_val = graph[point][1]
+        for i in range(len(graph[point])):
+            if pnt_val[i] + point_val < shrt[pnt_pos[i]]:
+                shrt[pnt_pos[i]] = pnt_val[i] + point_val
+    
 
-
-
-def ch(point, way, point_val):
-    global shortest
-    pnt_pos = graf[point][0][way]
-    pnt_val = graf[point][1][way]
-    if pnt_val + point_val < shortest[pnt_pos]:
-        shortest[pnt_pos] = pnt_val + point_val
-
-def da_way():
-    x = []
-    for i in unvisited:
-        x.append(shortest[i])
-    return shortest.index(min(x))
-
-
-# body
-for i in range(4):
-    cnt = da_way()
-    for j in range(2):
-        ch(cnt, j, shortest[cnt])
-    unvisited.remove(cnt)
-    itr.append(cnt)
-
-print(itr)
-print(shortest)
+    def next_point(shrt):
+        x = []
+        for i in unvisited:
+            x.append(shortest[i])
+        return shortest.index(min(x))
+    
+    
+    # body
+    for i in range(len(graph)):
+        cnt = next_point(shortest)
+        wrt(cnt, shortest[cnt], graph, shortest)
+        unvisited.remove(cnt)
+        # itr.append(cnt)
+    
+    # print(itr)
+    return shortest
+print(alg(graf))
