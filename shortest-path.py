@@ -28,6 +28,7 @@ graf = [[[2, 3], [7, 9]],
 
 def alg(graph):
     # setup
+
     # itr = []
     unvisited = [graph.index(i) for i in graph]
     shortest  = [math.inf for i in graph]
@@ -42,20 +43,19 @@ def alg(graph):
                 shrt[pnt_pos[i]] = pnt_val[i] + point_val
     
 
-    def next_point(shrt):
-        x = []
-        for i in unvisited:
-            x.append(shortest[i])
-        return shortest.index(min(x))
+    def next_point(shrt, unvst):
+        return shrt.index(min([shrt[i] for i in unvst]))
     
     
     # body
     for i in range(len(graph)):
-        cnt = next_point(shortest)
+        cnt = next_point(shortest, unvisited)
         wrt(cnt, shortest[cnt], graph, shortest)
         unvisited.remove(cnt)
         # itr.append(cnt)
     
     # print(itr)
     return shortest
+
+
 print(alg(graf))
