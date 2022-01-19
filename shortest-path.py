@@ -21,6 +21,9 @@ from graphs import *
 
 
 def alg(graph):
+    # TODO fix the issue where python returns error with graph1 by
+    # changing shortest to [index, shortest_value]
+
     # setup
     unvisited = [graph.index(i) for i in graph]
     shortest  = [math.inf for i in graph]
