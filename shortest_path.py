@@ -1,4 +1,4 @@
-# Implementation of Dijkstra's algorithm by ywa. This was initially
+# Implementation of Dijkstra's algorithm by ywa V. 1.0. This was initially
 # made as a part of a challenge.
 # Copyright (C) 2021 ywa
 
@@ -15,9 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+import numpy as np
 import math
+import time
+
 from graphs import *
+
+start = time.time()
 
 
 def alg(graph):
@@ -34,26 +38,25 @@ def alg(graph):
         pnt_pos = graph[point][0]
         pnt_val = graph[point][1]
         for i in range(len(graph[point][0])):
-            #print(pnt_val[i] + point_val, pnt_pos[i])
             if pnt_val[i] + point_val < shrt[pnt_pos[i]]:
                 shrt[pnt_pos[i]] = pnt_val[i] + point_val
     
 
     def next_point(shrt, unvst):
-        print([shrt[i] for i in unvst])
-        print(min([shrt[i] for i in unvst]))
-        return shrt.index(min([shrt[i] for i in unvst]))
-    
-    
+        min_num = min([shrt[i] for i in unvst])
+        for i in np.where(np.array(shrt) == min_num)[0]:
+            if i in unvisited:
+                return i 
     # body
     for i in range(len(graph)):
         cnt = next_point(shortest, unvisited)
-        print(cnt)
         wrt(cnt, shortest[cnt], graph, shortest)
-        print(shortest)
         unvisited.remove(cnt)
     
     return shortest
 
 
-print(alg(graph0))
+print(alg(graph1))
+# for x in range(10000):
+#     alg(graph1)
+# print((time.time() - start) / 10000)
