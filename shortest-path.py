@@ -17,19 +17,11 @@
 
 
 import math
+from graphs import *
 
-
-# graph in lists
-# god kill me please
-graf = [[[2, 3], [7, 9]],
-        [[2, 3], [5, 3]],
-        [[0, 1], [7, 5]],
-        [[0, 1], [9, 3]]]
 
 def alg(graph):
     # setup
-
-    # itr = []
     unvisited = [graph.index(i) for i in graph]
     shortest  = [math.inf for i in graph]
     shortest[0] = 0
@@ -38,24 +30,27 @@ def alg(graph):
     def wrt(point, point_val, graph, shrt):
         pnt_pos = graph[point][0]
         pnt_val = graph[point][1]
-        for i in range(len(graph[point])):
+        for i in range(len(graph[point][0])):
+            #print(pnt_val[i] + point_val, pnt_pos[i])
             if pnt_val[i] + point_val < shrt[pnt_pos[i]]:
                 shrt[pnt_pos[i]] = pnt_val[i] + point_val
     
 
     def next_point(shrt, unvst):
+        print([shrt[i] for i in unvst])
+        print(min([shrt[i] for i in unvst]))
         return shrt.index(min([shrt[i] for i in unvst]))
     
     
     # body
     for i in range(len(graph)):
         cnt = next_point(shortest, unvisited)
+        print(cnt)
         wrt(cnt, shortest[cnt], graph, shortest)
+        print(shortest)
         unvisited.remove(cnt)
-        # itr.append(cnt)
     
-    # print(itr)
     return shortest
 
 
-print(alg(graf))
+print(alg(graph0))
