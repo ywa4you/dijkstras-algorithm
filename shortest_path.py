@@ -16,7 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import numpy as np
-import math
+# import math
 import time
 
 from graphs import *
@@ -30,7 +30,8 @@ def alg(graph):
 
     # setup
     unvisited = [graph.index(i) for i in graph]
-    shortest  = [math.inf for i in graph]
+    #shortest  = [math.inf for i in graph]
+    shortest  = [999 for i in graph]
     shortest[0] = 0
     
     
