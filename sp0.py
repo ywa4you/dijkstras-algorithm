@@ -1,4 +1,4 @@
-# Implementation of Dijkstra's algorithm by ywa V. 1.0. This was initially
+# Implementation of Dijkstra's algorithm by ywa V. 1.1. This was initially
 # made as a part of a challenge.
 # Copyright (C) 2021 ywa
 
@@ -25,9 +25,6 @@ start = time.time()
 
 
 def alg(graph):
-    # TODO fix the issue where python returns error with graph1 by
-    # changing shortest to [index, shortest_value]
-
     # setup
     unvisited = [graph.index(i) for i in graph]
     #shortest  = [math.inf for i in graph]
@@ -57,7 +54,7 @@ def alg(graph):
     return shortest
 
 
-print(alg(graph2))
-# for x in range(10000):
-#     alg(graph1)
-# print((time.time() - start) / 10000)
+#print(alg(graph1))
+for x in range(10000):
+    alg(graph1)
+print((time.time() - start) / 10000)
