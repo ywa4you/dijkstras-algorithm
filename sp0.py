@@ -54,7 +54,7 @@ def alg(graph):
     return shortest
 
 
-#print(alg(graph1))
-for x in range(10000):
-    alg(graph1)
-print((time.time() - start) / 10000)
+print(alg(graph2))
+#for x in range(10000):
+#    alg(graph1)
+#print((time.time() - start) / 10000)

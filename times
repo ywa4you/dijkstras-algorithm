@@ -6,3 +6,5 @@ Version		Time
 sp1.py
 Version		Time
 1.0		1.079 * 10^-4
+This one fixes the bug where there are points beyond reach, but the time seems to be the same on average.
+1.1		1.079 * 10^-4

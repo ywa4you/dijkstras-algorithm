@@ -56,24 +56,24 @@ def alg(graph):
 
 
     for point in graph:
-    # step 0: define needed variables
-        dsc_name_list = [pnt[0] for pnt in dsc]
-        dsc_val_list = [pnt[1] for pnt in dsc]
-
-    # step 1: find smallest point
-        current_point = next_point(dsc, dsc_name_list, dsc_val_list)
-        #method pop() needs index hence this
-        pop_idx = dsc.index(current_point)
-
-    # step 2: move it to visited
-        vst.append(dsc.pop(pop_idx))
-        vst_names.append(current_point[0])
-
-    # step 3: update all the values
-        update(current_point, dsc_name_list, dsc_val_list)
+        if dsc:
+        # step 0: define needed variables
+            dsc_name_list = [pnt[0] for pnt in dsc]
+            dsc_val_list = [pnt[1] for pnt in dsc]
+        # step 1: find smallest point
+            current_point = next_point(dsc, dsc_name_list, dsc_val_list)
+            #method pop() needs index hence this
+            pop_idx = dsc.index(current_point)
+        # step 2: move it to visited
+            vst.append(dsc.pop(pop_idx))
+            vst_names.append(current_point[0])
+        # step 3: update all the values
+            update(current_point, dsc_name_list, dsc_val_list)
+        else:
+            return vst
     return vst
 
-print(alg(graph1))
+print(alg(graph2))
 #for x in range(10000):
 #    alg(graph1)
 #print((time.time() - start) / 10000)
