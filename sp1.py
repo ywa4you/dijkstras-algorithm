@@ -20,7 +20,6 @@ def alg(graph, start, end):
     # form [[name, shortest_value], ...]
     vst = []
     vst_names = set()
-    # dsc = [[start, 0]]
     dsc = [[0, 0, 0]]
     current_point = [start, 0]
 
@@ -92,16 +91,16 @@ if __name__ == "__main__":
     from graphs import *
     
     
-    start = 0
+    strt = 0
     end = 29
     
-    result = alg(graph2, start, end)
+    result = alg(graph2, strt, end)
     
-    order = "->".join([str(i) for i in order(result, start, end)])
+    order = "->".join([str(i) for i in order(result, strt, end)])
     
     start = time.time()
     for x in range(10000):
-        alg(graph1, start, end)
+        alg(graph1, strt, end)
     time = (time.time() - start) / 10000
     
     print("Time: %gsec" %time)
