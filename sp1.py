@@ -15,23 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import time
-from graphs import *
 
-start = time.time()
-
-
-def alg(graph):
+def alg(graph, start, end):
     # form [[name, shortest_value], ...]
     vst = []
-    vst_names = []
-    dsc = [[0, 0]]
+    vst_names = set()
+    # dsc = [[start, 0]]
+    dsc = [[0, 0, 0]]
+    current_point = [start, 0]
 
 
     def next_point(points_list, name_list, val_list):
         sml_val = min(val_list)
         # [smallest value name, smallest value]
-        return [name_list[val_list.index(sml_val)], sml_val]
+        val_idx = val_list.index(sml_val)
+        return [name_list[val_idx], sml_val], val_idx
 
 
     def update(pnt, name_list, val_list):
@@ -45,35 +43,67 @@ def alg(graph):
 
                 if name in name_list:
                     # value of point in dsc
-                    val = val_list[name_list.index(name)]
+                    name_idx = name_list.index(name)
+                    val = val_list[name_idx]
                     if new_val < val:
-                        dsc.remove([name, val])
-                        dsc.append([name, new_val])
+                        del dsc[name_idx]
+                        dsc.append([name, new_val, pnt[0]])
                 else:
-                    dsc.append([name, new_val])
+                    dsc.append([name, new_val, pnt[0]])
             else:
                 pass
 
 
     for point in graph:
-        if dsc:
+        if current_point[0] != end or dsc == True:
         # step 0: define needed variables
             dsc_name_list = [pnt[0] for pnt in dsc]
             dsc_val_list = [pnt[1] for pnt in dsc]
         # step 1: find smallest point
-            current_point = next_point(dsc, dsc_name_list, dsc_val_list)
-            #method pop() needs index hence this
-            pop_idx = dsc.index(current_point)
+            current_point, current_idx = next_point(dsc, dsc_name_list, dsc_val_list)
         # step 2: move it to visited
-            vst.append(dsc.pop(pop_idx))
-            vst_names.append(current_point[0])
+            vst.append(dsc.pop(current_idx))
+            del dsc_name_list[current_idx]
+            del dsc_val_list[current_idx]
+            vst_names.add(current_point[0])
         # step 3: update all the values
             update(current_point, dsc_name_list, dsc_val_list)
         else:
             return vst
     return vst
 
-print(alg(graph2))
-#for x in range(10000):
-#    alg(graph1)
-#print((time.time() - start) / 10000)
+
+def order(spp, start, point, res=[]):
+    if point == start:
+        res.insert(0, point)
+        return(res)
+    else:
+        res.insert(0, point)
+        idx = [i[0] for i in spp].index(point)
+        next_pnt = spp[idx][2]
+        order(spp[:idx], start, next_pnt)
+        return(res)
+
+
+if __name__ == "__main__": 
+
+
+    import time
+    from graphs import *
+    
+    
+    start = 0
+    end = 29
+    
+    result = alg(graph2, start, end)
+    
+    order = "->".join([str(i) for i in order(result, start, end)])
+    
+    start = time.time()
+    for x in range(10000):
+        alg(graph1, start, end)
+    time = (time.time() - start) / 10000
+    
+    print("Time: %gsec" %time)
+    print("Order: %s" %order)
+    print("Shortes path length: %i" %result[-1][1])
