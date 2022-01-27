@@ -1,4 +1,4 @@
-# Implementation of Dijkstra's algorithm by ywa V. 1.0. This was initially
+# Implementation of Dijkstra's algorithm by ywa V. 1.2. This was initially
 # made as a part of a challenge.
 # Copyright (C) 2021 ywa
 
