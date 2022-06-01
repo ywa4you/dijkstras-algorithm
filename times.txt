@@ -1,16 +1,23 @@
 sp0.py		visited created at start
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Version		Time
 1.0 		3.105 * 10^-4
-1.1		2.756 * 10^-4
+1.1		    2.756 * 10^-4
+
 
 sp1.py		adding to visited
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Version		Time
-1.0		1.079 * 10^-4
+1.0		    1.079 * 10^-4
+
 This one fixes the bug where there are points beyond reach, but the time seems to be the same on average.
-1.1		1.079 * 10^-4
+1.1		    1.079 * 10^-4
+
 This one should be faster
-1.2		1.021 * 10^-4
+1.2		    1.021 * 10^-4
+
 
 spexp.py	networkx implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Version		Time
-1.0		8.408 * 10^-5
+1.0		    8.408 * 10^-5
